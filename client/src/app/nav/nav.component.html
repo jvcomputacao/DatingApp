@@ -5,28 +5,30 @@
   }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark fixed-top bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">Receba</a>
+      <a class="navbar-brand" routerLink="/" routerLinkActive="active">Receba</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Matchs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Messages</a></li>
-            <li class="nav-item" (click)="logout()">
-              <a class="nav-link disabled">Loggout</a></li>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ng-container *ngIf="(accountService.currentUser$ | async)">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="/members" routerLinkActive="active">Matchs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active" >Lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/messages" routerLinkActive="active" >Messages</a></li>
+          </ng-container>
             </ul>
+
+
  
-          <div class="dropdown" *ngIf="(accountService.currentUser$ | async)" dropdown>
-            <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcome user</a>
+          <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+            <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username | titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                <a class="dropdown-item">Edit Profile</a>
                <div class="dropdown-divider"></div>
@@ -49,7 +51,7 @@
           class="form-control me-2" 
           type="password" 
           placeholder="Password">
-          <button class="btn btn-outline-success" type="submit">login</button>
+          <button class="btn btn-success" type="submit">login</button>
         </form>
 
 

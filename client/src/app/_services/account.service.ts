@@ -41,6 +41,7 @@ export class AccountService {
 
   setCurrentUser(user:User){
     this.currentUserSource.next(user);
+  
   }
 
   logout(){

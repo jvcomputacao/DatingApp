@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
       next: response => this.users = response,
       error: error => console.log(error),
       complete: () => console.log('request has completed')
+
     })
   }
 
